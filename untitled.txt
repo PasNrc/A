@@ -1,0 +1,49 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double salary, advance, socialSecurity, maxAdvance, netPay;
+    bool isOverdue = false;
+
+    cout << "===== โปรแกรมคำนวณเงินเดือน (Payroll) =====\n\n";
+
+    cout << "ป้อนเงินเดือนประจำ (Salary): ";
+    cin >> salary;
+
+    cout << "ป้อนเงินเบิกล่วงหน้า (Advance Money): ";
+    cin >> advance;
+
+    cout << "ป้อนเงินประกันสังคม (Social Security): ";
+    cin >> socialSecurity;
+
+    // คำนวณเพดานเบิกล่วงหน้า = 25% ของเงินเดือน
+    maxAdvance = salary * 0.25;
+
+    // ตรวจสอบเงื่อนไขเบิกเกิน
+    if (advance > maxAdvance) {
+        isOverdue = true;
+        advance = maxAdvance;   // ปรับให้เบิกได้สูงสุดแค่ 25%
+    }
+
+    // คำนวณเงินที่ได้รับ
+    netPay = salary - advance - socialSecurity;
+
+    // แสดงผลลัพธ์
+    cout << fixed << setprecision(2);
+    cout << "\n============== สลิปเงินเดือน ==============\n";
+    cout << "เงินเดือน (Salary)          : " << salary << " บาท\n";
+    cout << "เงินเบิกล่วงหน้า (Advance)    : " << advance << " บาท\n";
+    cout << "เงินประกันสังคม (Soc.Sec.)   : " << socialSecurity << " บาท\n";
+    cout << "--------------------------------------------\n";
+    cout << "เงินที่ได้รับ (Net Pay)      : " << netPay << " บาท\n";
+    cout << "============================================\n";
+
+    if (isOverdue) {
+        cout << "\n*** เบิกเงินเกิน (Overdue) ***\n";
+        cout << "เนื่องจากเบิกล่วงหน้าเกิน 25% ของเงินเดือน\n";
+        cout << "ระบบปรับให้เบิกได้สูงสุด " << maxAdvance << " บาท\n";
+    }
+
+    return 0;
+}
